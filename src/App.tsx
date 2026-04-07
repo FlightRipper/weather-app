@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-const API_KEY = "f694ac6bcb0a3f7a3b041c999012f376";
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 type WeatherData = {
   city: string;
