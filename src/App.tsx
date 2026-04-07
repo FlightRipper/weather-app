@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
@@ -91,14 +91,6 @@ function App() {
   const [error, setError] = useState("");
   const theme = weather ? getWeatherTheme(weather.condition) : "default";
 
-  useEffect(() => {
-    if (weather) {
-      document.title = `Weather in ${weather.city}`;
-      return;
-    }
-    document.title = "Weather App";
-  }, [weather]);
-
   const fetchWeather = async () => {
     const trimmedCity = city.trim();
     if (!trimmedCity) {
@@ -163,14 +155,6 @@ function App() {
     }
   };
 
-  const handleKeyDown = async (
-    event: React.KeyboardEvent<HTMLInputElement>,
-  ) => {
-    if (event.key === "Enter") {
-      await fetchWeather();
-    }
-  };
-
   const displayCity = weather
     ? `${weather.city}, ${weather.country}`
     : "Live Weather";
@@ -198,7 +182,6 @@ function App() {
             type="text"
             value={city}
             onChange={(event) => setCity(event.target.value)}
-            onKeyDown={handleKeyDown}
             placeholder="Type a city"
           />
           <button onClick={fetchWeather}>Search</button>
